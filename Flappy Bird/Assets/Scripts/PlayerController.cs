@@ -82,6 +82,21 @@ public class PlayerController : MonoBehaviour {
 		playerRigid.velocity = Vector2.zero;
 		// Stop the flapping animation
 		GetComponent<Animator> ().enabled = false;
+		SpriteRenderer renderer = transform.GetComponent<SpriteRenderer>();
+		StartCoroutine(Fade(renderer, 0.1f));
 	}
 
+	IEnumerator Fade(SpriteRenderer renderer, float value)
+	{
+		renderer.color = new Color(renderer.color.r - value, renderer.color.g - value, renderer.color.b - value, renderer.color.a);
+		if (renderer.color.r > 0)
+		{
+			yield return new WaitForSeconds (Time.deltaTime);
+			StartCoroutine(Fade(renderer, value));
+		}
+		else
+		{
+			StopCoroutine(Fade(renderer, value));
+		}
+	}
 }
