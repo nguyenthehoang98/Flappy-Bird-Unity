@@ -5,10 +5,10 @@
 4. Tính toán vị trí dựa vào công thức vật lý
 # ĐÁNH GIÁ VÀ ĐỀ XUẤT
 ># ĐÁNH GIÁ
-Uu điểm :
+>## Uu điểm :
     + Triển khai nhanh trực quan
     + Thiết kế đơn giản | phù hợp với dự án kích thước nhỏ
-Nhược điểm :
+>## Nhược điểm :
     + Tổ chức chưa được tốt => tất cả bị ném vào GameManager (khó quản lý + maintain)
     + Kết dính code nhiều => khó chỉnh sửa
 ># ĐỀ XUẤT
