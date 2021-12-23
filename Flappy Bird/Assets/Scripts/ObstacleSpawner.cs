@@ -1,12 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour {
 
 	[SerializeField] private float waitTime;
-	[SerializeField] private GameObject[] obstaclePrefabs;
+	[SerializeField] private GameObject[] obstaclePrefabs; // hard prefab in slot 1 | easy prefab in slot 0
 	private float tempTime;
+	private int currentIndex;
+	private static readonly int[] difficultConfigs = new int[5]
+	{
+		0, 0, 0, 1, 1,
+	};
 
 	void Start(){
 		tempTime = waitTime - Time.deltaTime;
@@ -18,7 +21,15 @@ public class ObstacleSpawner : MonoBehaviour {
 			if(tempTime > waitTime){
 				// Wait for some time, create an obstacle, then set wait time to 0 and start again
 				tempTime = 0;
-				GameObject pipeClone = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], transform.position, transform.rotation);
+				GameObject o = obstaclePrefabs[difficultConfigs[currentIndex]];
+				GameObject pipeClone = Instantiate(o, transform.position, transform.rotation);
+				
+				// reset
+				currentIndex++;
+				if (currentIndex >= difficultConfigs.Length)
+				{
+					currentIndex = 0;
+				}
 			}
 		}
 	}
